@@ -1,0 +1,20 @@
+{
+  "DataDir": "datadir",
+  "P2P": {
+    "MaxInboundPeers": 6,
+    "MaxOutboundPeers": 6
+  },
+  "RPC": {
+    "HTTPHost": "localhost",
+    "HTTPPort": 9009
+  },
+  "IpfsConf": {
+    "Profile": "server",
+    "IpfsPort": 40405,
+    "BlockPinThreshold": 0.3,
+    "FlipPinThreshold": 0.5
+  },
+  "Sync": {
+    "FastSync": true
+  }
+}
