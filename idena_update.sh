@@ -64,7 +64,7 @@ echo ""
 systemctl start idena.service
 systemctl enable idena.service
 
-# Finish
+# Successfull update
 echo ""
 echo "********************************************"
 echo "RPI IDENA NODE UPDATE SUCCESSFULLY COMPLETED"
