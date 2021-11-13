@@ -22,7 +22,7 @@ echo "- Creating a user name and password for IDENA Service"
 echo ""
 if [ $(id -u) -eq 0 ]; then
 	read -p "Enter new username : " username
-	read -s -p "Enter password : " password
+	read -p "Enter password : " password
 	egrep "^$username" /etc/passwd >/dev/null
 	if [ $? -eq 0 ]; then
 		echo "$username exists!"
@@ -30,6 +30,7 @@ if [ $(id -u) -eq 0 ]; then
 	else
 		pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 		useradd -s /bin/bash -m -p $pass $username
+        usermod -aG sudo $username
 		[ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
 	fi
 else
@@ -74,7 +75,6 @@ cp config.json /home/$username/
 cp idena_update.sh /home/$username/
 
 chown -R $username:$username /home/$username/
-
 
 # Finish
 echo ""

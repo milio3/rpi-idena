@@ -4,7 +4,7 @@ After=network.target
 StartLimitIntervalSec=0
 [Service]
 User=idena
-WorkingDirectory=/home/idena/idena-go
+WorkingDirectory=/home/idena/
 ExecStart=/home/idena/idena-node --config=/home/idena/config.json
 Restart=on-failure
 RestartSec=60
