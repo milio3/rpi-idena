@@ -17,7 +17,6 @@ echo ""
 echo "- Updating Ubuntu"
 echo ""
 apt-get update
-apt-get upgrade -y
 echo ""
 
 # Stopping idena.service
@@ -30,7 +29,7 @@ systemctl reset-failed
 echo ""
 
 # /home/<user>
-cd /home/ubuntu/
+cd ~
 
 # Backup idena-node
 echo "- Backup idena-node -> idena-node-old"
