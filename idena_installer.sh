@@ -9,6 +9,12 @@ echo "RPI IDENA NODE INSTALLER"
 echo "************************"
 echo ""
 
+# Presets
+echo "- Disable cloud-init and set timezone"
+touch /etc/cloud/cloud-init.disabled
+timedatectl set-timezone Europe/Madrid
+echo ""
+
 # Updating Ubuntu and installing all required dependencies
 echo "- Updating Ubuntu and installing all required dependencies"
 echo ""
