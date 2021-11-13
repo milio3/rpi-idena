@@ -14,7 +14,7 @@ echo "- Updating Ubuntu and installing all required dependencies"
 echo ""
 apt-get update
 apt-get upgrade -y
-apt-get install -y jq git ufw curl wget nano screen psmisc unzip golang-go
+apt-get install -y jq git ufw curl wget nano screen psmisc unzip golang-go vnstat
 echo ""
 
 # Creating user
