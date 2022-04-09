@@ -20,7 +20,19 @@ echo "- Updating Ubuntu and installing all required dependencies"
 echo ""
 apt-get update
 apt-get upgrade -y
-apt-get install -y jq git ufw curl wget nano screen psmisc unzip golang-go vnstat
+apt-get install -y jq git ufw curl wget nano screen psmisc unzip vnstat
+echo ""
+
+# Install go-lang
+cd /tmp
+fileName='go1.18.linux-arm64.tar.gz'
+wget -c https://golang.org/dl/$fileName && sudo rm -rfv /usr/local/go && sudo tar -C /usr/local -xvf $fileName
+grep -q 'GOPATH=' ~/.bashrc || cat >> ~/.bashrc << 'EOF'
+export GOPATH=$HOME/go
+export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin
+EOF
+source ~/.bashrc
+rm -rf "$fileName"
 echo ""
 
 # Creating user
