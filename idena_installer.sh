@@ -2,6 +2,7 @@
 # RPI IDENA NODE INSTALLER
 # @milio3
 # 13/11/2021
+# 11/04/2021 - Force GO 1.16
 #####################################
 
 echo "************************"
@@ -16,23 +17,16 @@ timedatectl set-timezone Europe/Madrid
 echo ""
 
 # Updating Ubuntu and installing all required dependencies
-echo "- Updating Ubuntu and installing all required dependencies"
+echo "- Updating and installing all required dependencies"
 echo ""
 apt-get update
 apt-get upgrade -y
-apt-get install -y jq git ufw curl wget nano screen psmisc unzip vnstat
+apt-get install -y jq git ufw curl wget nano screen psmisc unzip vnstat gcc g++ libc6-dev 
 echo ""
 
 # Install go-lang
-cd /tmp
-fileName='go1.18.linux-arm64.tar.gz'
-wget -c https://golang.org/dl/$fileName && sudo rm -rfv /usr/local/go && sudo tar -C /usr/local -xvf $fileName
-grep -q 'GOPATH=' ~/.bashrc || cat >> ~/.bashrc << 'EOF'
-export GOPATH=$HOME/go
-export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin
-EOF
-source ~/.bashrc
-rm -rf "$fileName"
+wget -c https://golang.org/dl/go1.16.15.linux-arm64.tar.gz
+tar -C /usr/local -xvf go1.16.15.linux-arm64.tar.gz
 echo ""
 
 # Creating user
@@ -48,7 +42,7 @@ if [ $(id -u) -eq 0 ]; then
 	else
 		pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 		useradd -s /bin/bash -m -p $pass $username
-        usermod -aG sudo $username
+                usermod -aG sudo $username
 		[ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
 	fi
 else
@@ -62,7 +56,7 @@ echo "- IDENA node install"
 echo ""
 
 # Take node version
-read -p "Enter the number of the idena-go version (eg. 0.28.0): " version
+read -p "Enter the number of the idena-go version (eg. 0.28.8): " version
 echo ""
 
 # Continue as username
@@ -71,7 +65,7 @@ whoami
 cd ~
 git clone https://github.com/idena-network/idena-go.git
 
-go build -ldflags "-X main.version=$version"
+/usr/local/go/bin/go build -ldflags "-X main.version=$version"
 mv idena-go ../idena-node
 
 cd ~
