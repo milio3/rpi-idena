@@ -2,6 +2,7 @@
 # RPI IDENA NODE UPDATER
 # @milio3
 # 09/10/2021
+# 11/04/2022 - Force GO 1.16
 #####################################
 
 echo "**********************"
@@ -10,7 +11,7 @@ echo "**********************"
 echo ""
 
 # Take node version
-read -p "Enter the number of the idena-go version (eg. 0.27.2): " version
+read -p "Enter the number of the idena-go version (eg. 0.28.8): " version
 echo ""
 
 # Updating Ubuntu
@@ -53,7 +54,7 @@ echo ""
 
 # Compile node
 echo "- Compile idena-node version $version"
-go build -ldflags "-X main.version=$version"
+/usr/local/go/bin/go build -ldflags "-X main.version=$version"
 mv idena-go ../idena-node
 echo ""
 
