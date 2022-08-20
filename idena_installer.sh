@@ -2,7 +2,8 @@
 # RPI IDENA NODE INSTALLER
 # @milio3
 # 13/11/2021
-# 11/04/2021 - Force GO 1.16
+# 11/04/2022 - Force GO 1.16
+# 21/08/2022 - idenachain.db from ltraveler GIT
 #####################################
 
 echo "************************"
@@ -69,12 +70,11 @@ git clone https://github.com/idena-network/idena-go.git
 mv idena-go ../idena-node
 
 cd ~
-mkdir datadir ; mkdir datadir/idenachain.db ; mkdir datadir/keystore
+mkdir datadir ; mkdir datadir/ ; mkdir datadir/keystore
 
-cd datadir/idenachain.db
-wget https://sync.idena.site/idenachain.db.zip
-unzip idenachain.db.zip
-rm idenachain.db.zip
+cd datadir/
+git clone -b main --depth 1 --single-branch https://github.com/ltraveler/idenachain.db.git
+rm -rf ./.git
 
 cd ~
 chmod +x idena-node
